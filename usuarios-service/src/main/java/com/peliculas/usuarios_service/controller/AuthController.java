@@ -2,6 +2,7 @@ package com.peliculas.usuarios_service.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import com.peliculas.usuarios_service.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "*") // ✅ AGREGADO
 public class AuthController {
 
     @Autowired
@@ -34,7 +36,6 @@ public class AuthController {
             .orElse(ResponseEntity.status(401).build());
     }
 
-    // 🔥 ESTE ES EL QUE TE FALTA
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerUsuario(@PathVariable Long id) {
         return repo.findById(id)

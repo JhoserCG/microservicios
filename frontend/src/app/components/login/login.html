@@ -1,0 +1,26 @@
+<div style="min-height:100vh; background:#141414; display:flex; align-items:center; justify-content:center;">
+  <div style="background:#000; padding:48px; border-radius:8px; width:100%; max-width:400px;">
+    
+    <h1 style="color:#e50914; font-size:28px; font-weight:900; letter-spacing:2px; margin-bottom:32px; text-align:center;">CINEMAX</h1>
+    <h2 style="font-size:28px; font-weight:700; margin-bottom:24px;">Iniciar sesión</h2>
+
+    <div *If="error" style="background:#e50914; padding:12px; border-radius:4px; margin-bottom:16px; font-size:14px;">
+      {{ error }}
+    </div>
+
+    <input [(ngModel)]="email" type="email" placeholder="Email">
+    <input [(ngModel)]="password" type="password" placeholder="Contraseña">
+
+    <button (click)="login()" class="netflix-btn" style="width:100%; padding:14px; font-size:16px; margin-top:8px;">
+      Iniciar sesión
+    </button>
+
+    <p style="text-align:center; margin-top:20px; color:#aaa;">
+      ¿No tienes cuenta? 
+      <a routerLink="/registro" style="color:white; font-weight:700;">Regístrate</a>
+    </p>
+    <p style="text-align:center; margin-top:12px;">
+      <a routerLink="/peliculas" style="color:#aaa; font-size:14px;">← Volver a películas</a>
+    </p>
+  </div>
+</div>

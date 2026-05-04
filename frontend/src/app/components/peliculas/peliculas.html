@@ -1,0 +1,38 @@
+<div style="min-height:100vh; background:#141414;">
+  <!-- Navbar -->
+  <nav style="background:linear-gradient(to bottom,#000 0%,transparent 100%); padding:20px 40px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100;">
+    <span style="color:#e50914; font-size:28px; font-weight:900; letter-spacing:2px;">CINEMAX</span>
+    <div style="display:flex; gap:12px; align-items:center;">
+      <input [(ngModel)]="busqueda" (keyup.enter)="buscar()" placeholder="🔍 Buscar..." style="width:220px; margin:0; padding:8px 12px; background:#333; border-radius:20px;">
+      <button (click)="buscar()" class="netflix-btn" style="padding:8px 16px;">Buscar</button>
+      <button (click)="listar()" class="netflix-btn-outline" style="padding:8px 16px;">Todas</button>
+      <a routerLink="/login" class="netflix-btn-outline" style="padding:8px 16px; text-decoration:none;">Login</a>
+      <a *ngIf="auth.esAdmin()" routerLink="/admin" class="netflix-btn" style="padding:8px 16px; text-decoration:none;">Admin</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div style="padding:40px 40px 20px;">
+    <h1 style="font-size:36px; font-weight:800; margin-bottom:8px;">🎬 Películas disponibles</h1>
+    <p style="color:#aaa;">Explora nuestra colección</p>
+  </div>
+
+  <!-- Grid de películas -->
+  <div style="padding:20px 40px; display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px;">
+    <div *ngFor="let p of peliculas"
+      style="background:#1f1f1f; border-radius:6px; overflow:hidden; transition:transform 0.2s; cursor:pointer;"
+      onmouseover="this.style.transform='scale(1.05)'"
+      onmouseout="this.style.transform='scale(1)'">
+      <img [src]="p.imagenUrl" style="width:100%; height:280px; object-fit:cover;" onerror="this.src='https://via.placeholder.com/200x280?text=Sin+imagen'">
+      <div style="padding:12px;">
+        <h3 style="font-size:15px; font-weight:700; margin-bottom:4px;">{{ p.nombre }}</h3>
+        <p style="font-size:12px; color:#aaa; line-height:1.4;">{{ p.descripcion }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sin películas -->
+  <div *ngIf="peliculas.length === 0" style="text-align:center; padding:80px; color:#aaa;">
+    <p style="font-size:24px;">No hay películas disponibles</p>
+  </div>
+</div>

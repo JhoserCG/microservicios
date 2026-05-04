@@ -1,0 +1,59 @@
+<div style="min-height:100vh; background:#141414; padding:40px;">
+  
+  <!-- Navbar -->
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px;">
+    <span style="color:#e50914; font-size:24px; font-weight:900; letter-spacing:2px;">CINEMAX</span>
+    <a routerLink="/peliculas" class="netflix-btn-outline" style="text-decoration:none; padding:8px 16px;">← Volver</a>
+  </div>
+
+  <h2 style="font-size:28px; font-weight:800; margin-bottom:32px;">⚙️ Panel de Administración</h2>
+
+  <!-- Formulario agregar -->
+  <div style="background:#1f1f1f; padding:32px; border-radius:8px; margin-bottom:32px; max-width:600px;">
+    <h3 style="margin-bottom:20px; font-size:18px;">➕ Agregar película</h3>
+    <input [(ngModel)]="nueva.nombre" placeholder="Nombre de la película">
+    <input [(ngModel)]="nueva.descripcion" placeholder="Descripción">
+    <input [(ngModel)]="nueva.imagenUrl" placeholder="URL de imagen">
+    <button (click)="agregar()" class="netflix-btn" style="width:100%; padding:12px;">Agregar película</button>
+  </div>
+
+  <!-- Formulario editar -->
+  <div *ngIf="editando" style="background:#2a1a1a; border:1px solid #e50914; padding:32px; border-radius:8px; margin-bottom:32px; max-width:600px;">
+    <h3 style="margin-bottom:20px; font-size:18px; color:#e50914;">✏️ Editando: {{ editando.nombre }}</h3>
+    <input [(ngModel)]="editando.nombre" placeholder="Nombre">
+    <input [(ngModel)]="editando.descripcion" placeholder="Descripción">
+    <input [(ngModel)]="editando.imagenUrl" placeholder="URL de imagen">
+    <div style="display:flex; gap:12px;">
+      <button (click)="guardarEdicion()" class="netflix-btn" style="flex:1; padding:12px;">Guardar</button>
+      <button (click)="editando = null" class="netflix-btn-outline" style="flex:1; padding:12px;">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Tabla películas -->
+  <div style="background:#1f1f1f; border-radius:8px; overflow:hidden;">
+    <table style="width:100%; border-collapse:collapse;">
+      <thead>
+        <tr style="background:#333;">
+          <th style="padding:16px; text-align:left;">Imagen</th>
+          <th style="padding:16px; text-align:left;">Nombre</th>
+          <th style="padding:16px; text-align:left;">Descripción</th>
+          <th style="padding:16px; text-align:center;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of peliculas" style="border-top:1px solid #333;">
+          <td style="padding:12px;">
+            <img [src]="p.imagenUrl" style="width:60px; height:80px; object-fit:cover; border-radius:4px;" onerror="this.src='https://via.placeholder.com/60x80?text=N/A'">
+          </td>
+          <td style="padding:12px; font-weight:600;">{{ p.nombre }}</td>
+          <td style="padding:12px; color:#aaa; font-size:14px;">{{ p.descripcion }}</td>
+          <td style="padding:12px; text-align:center;">
+            <button (click)="editar(p)" style="background:#f39c12; color:white; border:none; padding:8px 16px; border-radius:4px; cursor:pointer; margin-right:8px;">Editar</button>
+            <button (click)="eliminar(p.id!)" style="background:#e50914; color:white; border:none; padding:8px 16px; border-radius:4px; cursor:pointer;">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
